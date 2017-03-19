@@ -74,13 +74,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniNumber(View v){
         Button b = (Button) v;
+
         double buttonNumber = Integer.parseInt(b.getText().toString());
 
-
         if(operator == ""){
-            valueOne += buttonNumber;
+            valueOneText += b.getText().toString();
+
         }else{
-            valueTwo += buttonNumber;
+            valueTwoText += b.getText().toString();
         }
     }
 
@@ -92,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void mathOperate(View v) {
 
-
+        valueOne = Double.parseDouble(valueOneText);
+        valueTwo = Double.parseDouble(valueTwoText);
+        
         switch (operator){
             case "+": Maths.add(valueOne,valueTwo);
             case "-": Maths.sub(valueOne,valueTwo);
