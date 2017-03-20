@@ -57,13 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniOperator(View v){
         Button b = (Button) v;
+
+        if(operator!=null){
+            valueOne = result;
+        }
         operator = b.getText().toString();
 
     }
 
     public void mathOperate(View v) {
 
-        valueOne = Double.parseDouble(valueOneText);
+        if(valueOne==0){
+            valueOne = Double.parseDouble(valueOneText);
+        }
         valueTwo = Double.parseDouble(valueTwoText);
         displayOperator.setText(operator);
 
@@ -79,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         displayNumber.setText(Double.toString(result));
-
+        valueOne = result;
+        valueTwoText = "";
     }
 
     public void clearAll(View v){
