@@ -22,32 +22,14 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Button> numberList = new ArrayList<Button>();
 
-    private double valueOne = Double.NaN;
+    private double valueOne;
     private double valueTwo;
-    private String valueOneText;
-    private String valueTwoText;
+    private String valueOneText = "";
+    private String valueTwoText = "";
     private String operator = "";
     private TextView displayNumber;
-
-    private Button one;
-    private Button two;
-    private Button three;
-    private Button four;
-    private Button five;
-    private Button six;
-    private Button seven;
-    private Button eight;
-    private Button nine;
-    private Button ze;
-    private TextView numberDisplay;
-    private Button plus;
-    private Button minus;
-    private Button divide;
-    private Button mult;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    private double result;
+    private TextView displayOperator;
 
 
     @Override
@@ -55,33 +37,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        one = (Button) findViewById(R.id.one);numberList.add(one);
-        two = one = (Button) findViewById(R.id.two);
-        three = (Button) findViewById(R.id.three);
-        four = (Button) findViewById(R.id.four);
-        five = (Button) findViewById(R.id.five);
-        six = (Button) findViewById(R.id.six);
-        seven = (Button) findViewById(R.id.seven);
-        eight = (Button) findViewById(R.id.eight);
-        nine = (Button) findViewById(R.id.nine);
-        ze = (Button) findViewById(R.id.ze);
-        plus = (Button) findViewById(R.id.plus);
-
-
-
-
+        displayNumber = (TextView)findViewById(R.id.displayNumber);
+        displayNumber.setText("0");
+        displayOperator = (TextView)findViewById(R.id.operator);
     }
 
     public void iniNumber(View v){
         Button b = (Button) v;
 
-        double buttonNumber = Integer.parseInt(b.getText().toString());
-
         if(operator == ""){
             valueOneText += b.getText().toString();
+            displayNumber.setText(valueOneText);
 
         }else{
             valueTwoText += b.getText().toString();
+            displayNumber.setText(valueTwoText);
         }
     }
 
@@ -95,13 +65,31 @@ public class MainActivity extends AppCompatActivity {
 
         valueOne = Double.parseDouble(valueOneText);
         valueTwo = Double.parseDouble(valueTwoText);
-        
+        displayOperator.setText(operator);
+
         switch (operator){
-            case "+": Maths.add(valueOne,valueTwo);
-            case "-": Maths.sub(valueOne,valueTwo);
-            case "*": Maths.mult(valueOne,valueTwo);
-            case "/": Maths.div(valueOne,valueTwo);
+            case "+": result = Maths.add(valueOne,valueTwo);
+                break;
+            case "-": result = Maths.sub(valueOne,valueTwo);
+                break;
+            case "*": result = Maths.mult(valueOne,valueTwo);
+                break;
+            case "/": result = Maths.div(valueOne,valueTwo);
+                break;
         }
+
+        displayNumber.setText(Double.toString(result));
+
+    }
+
+    public void clearAll(View v){
+        valueOne = 0f;
+        valueTwo = 0f;
+        valueOneText = "";
+        valueTwoText = "";
+        operator = "";
+        displayNumber.setText("0");
+        result = 0;
     }
 
 

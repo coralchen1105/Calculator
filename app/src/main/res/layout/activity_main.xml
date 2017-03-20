@@ -186,5 +186,36 @@
         android:minWidth="50dp"
         android:layout_alignBaseline="@+id/divide"
         android:layout_alignBottom="@+id/divide"
-        android:layout_alignEnd="@+id/nine" />
+        android:layout_alignEnd="@+id/nine"
+        android:onClick="mathOperate"/>
+
+    <Button
+        android:text="C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/minus"
+        android:layout_toStartOf="@+id/mult"
+        android:layout_marginTop="36dp"
+        android:id="@+id/clear"
+        android:onClick="clearAll"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/clear"
+        android:layout_toEndOf="@+id/eight"
+        android:layout_marginStart="11dp"
+        android:id="@+id/operator" />
+
+    <Button
+        android:text="."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dot"
+        android:layout_alignBaseline="@+id/ze"
+        android:layout_alignBottom="@+id/ze"
+        android:layout_toEndOf="@+id/minus"
+        android:onClick="iniNumber"/>
+
 </RelativeLayout>
