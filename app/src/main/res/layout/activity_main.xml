@@ -209,13 +209,21 @@
         android:id="@+id/operator" />
 
     <Button
+        android:text="Replay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dot"
+        android:id="@+id/replay"
+        android:layout_alignEnd="@+id/nine" />
+
+    <Button
         android:text="."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dot"
+        android:onClick="iniNumber"
         android:layout_alignBaseline="@+id/ze"
         android:layout_alignBottom="@+id/ze"
-        android:layout_toEndOf="@+id/minus"
-        android:onClick="iniNumber"/>
+        android:layout_toEndOf="@+id/ze" />
 
 </RelativeLayout>

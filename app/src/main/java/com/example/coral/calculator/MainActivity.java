@@ -14,6 +14,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView displayNumber;
     private double result;
     private TextView displayOperator;
+    File file;
+
 
 
     @Override
@@ -87,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         displayNumber.setText(Double.toString(result));
         valueOne = result;
         valueTwoText = "";
+
+
     }
 
     public void clearAll(View v){
@@ -99,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
         result = 0;
     }
 
+    public void replay(View v) throws IOException {
+        file = new File("log,csv");
+        FileWriter writer = new FileWriter(file);
 
+    }
 
 }
