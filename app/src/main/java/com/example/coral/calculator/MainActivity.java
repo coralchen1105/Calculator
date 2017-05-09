@@ -1,5 +1,6 @@
 package com.example.coral.calculator;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,97 +19,47 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String TextExpression = "";
 
-    ArrayList<Button> numberList = new ArrayList<Button>();
-
-    private double valueOne;
-    private double valueTwo;
-    private String valueOneText = "";
-    private String valueTwoText = "";
-    private String operator = "";
-    private TextView displayNumber;
+    private TextView displayStringExpression;
     private double result;
-    private TextView displayOperator;
-    File file;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        displayNumber = (TextView)findViewById(R.id.displayNumber);
-        displayNumber.setText("0");
-        displayOperator = (TextView)findViewById(R.id.operator);
+        displayStringExpression = (TextView)findViewById(R.id.displayNumber);
+        displayStringExpression.setText("0");
     }
 
     public void iniNumber(View v){
+
         Button b = (Button) v;
-
-        if(operator == ""){
-            valueOneText += b.getText().toString();
-            displayNumber.setText(valueOneText);
-
-        }else{
-            valueTwoText += b.getText().toString();
-            displayNumber.setText(valueTwoText);
-        }
-    }
-
-    public void iniOperator(View v){
-        Button b = (Button) v;
-
-        if(operator!=null){
-            valueOne = result;
-        }
-        operator = b.getText().toString();
-
-    }
-
-    public void mathOperate(View v) {
-
-        if(valueOne==0){
-            valueOne = Double.parseDouble(valueOneText);
-        }
-        valueTwo = Double.parseDouble(valueTwoText);
-        displayOperator.setText(operator);
-
-        switch (operator){
-            case "+": result = Maths.add(valueOne,valueTwo);
-                break;
-            case "-": result = Maths.sub(valueOne,valueTwo);
-                break;
-            case "*": result = Maths.mult(valueOne,valueTwo);
-                break;
-            case "/": result = Maths.div(valueOne,valueTwo);
-                break;
-        }
-
-        displayNumber.setText(Double.toString(result));
-        valueOne = result;
-        valueTwoText = "";
-
-
+        TextExpression += b.getText().toString();
+        displayStringExpression.setText(TextExpression);
     }
 
     public void clearAll(View v){
-        valueOne = 0f;
-        valueTwo = 0f;
-        valueOneText = "";
-        valueTwoText = "";
-        operator = "";
-        displayNumber.setText("0");
         result = 0;
+        displayStringExpression.setText(Double.toString(result));
+        TextExpression = "";
+    }
+
+    public void tokenizerAction(View v) throws ParseException{
+        Subs subs = new Subs();
+        Tokenizer tz = new MySimpleTokenizer(TextExpression);
+        Expression pe = Expression.parseExp(tz);
+        result = pe.evaluate(subs);
+        displayStringExpression.setText(Double.toString(result));
     }
 
     public void replay(View v) throws IOException {
-        file = new File("log,csv");
-        FileWriter writer = new FileWriter(file);
 
     }
 
