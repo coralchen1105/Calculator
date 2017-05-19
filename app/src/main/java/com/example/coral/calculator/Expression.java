@@ -23,6 +23,11 @@ public abstract class Expression {
 			tz.next();
 			Expression exp = parseExp(tz);
 			return new AddExpression(term, exp);
+
+		}else if(tz.currentis("-")){
+			tz.next();
+			Expression exp = parseExp(tz);
+			return new SubExpression(term, exp);
 		}else{
 			return term;
 		}
@@ -34,6 +39,11 @@ public abstract class Expression {
 			tz.next();
 			Expression term = parseTerm(tz);
 			return new MultExpression(fact, term);
+
+		}else if(tz.currentis("/")){
+			tz.next();
+			Expression term = parseTerm(tz);
+			return new DivExpression(fact, term);
 		}else{
 			return fact;
 		}
